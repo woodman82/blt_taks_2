@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>BrightLynxTeam - Test Task 2</title>		
+	</head>
+	<body>
+		<script type="text/javascript">
+			// запрашиваем исходную позицию Коня и конвертируем ее в цировые координаты
+			let pos = prompt('Исходное положение:', 'D4');
+			posXY = [toX(pos[0]), pos[1]]; 
+
+			// массив координат(смещений) разрешенных ходов для Коня
+			let stepsHorse = [
+				[1, 2], [2, 1], [2, -1], [1, -2],
+				[-1, -2], [-2, -1], [-2, 1], [-1, 2]
+			];
+
+			// вычисляем массив координат допуcтимых ходов Коня
+			let resArr = [];
+
+			for (let i = 0; i < stepsHorse.length; i++) {
+				stepX =  posXY[0] + stepsHorse[i][0];
+				stepY = +posXY[1] + stepsHorse[i][1];
+				// добавляем "шаг" в массив результатов, если он не выходит за пределы доски
+				if ((stepX < 9) && (stepY < 9) &&
+					(stepX > 0) && (stepY > 0)) {
+					resArr.push(toChar(stepX) + stepY);
+				}
+			}
+			// сообщаем результат:
+			alert('Возможные варианты хода:\n' + resArr);
+			
+			// ВСПОМОГАТЕЛЬНЫЕ функции-конвертеры буквенной координаты в цифровую X-координату и обратно
+			function toX(c) {
+				let chars = {
+					'A': 1, 'B': 2, 'C': 3, 'D': 4,
+					'E': 5, 'F': 6, 'G': 7, 'H': 8
+				}
+				return chars[c];
+			};
+
+			function toChar(x) {
+				let coords = {
+					1: 'A', 2: 'B', 3: 'C', 4: 'D', 
+					5: 'E', 6: 'F', 7: 'G', 8: 'H' 
+				}
+				return coords[x];
+			};
+		</script>
+	</body>
+</html>
